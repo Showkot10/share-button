@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="main.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" charset="utf-8"></script>
+</head>
+<body>
+   <div class="container">
+       <h1>Lorem ipsum dolor sit amet.</h1>
+       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium atque voluptatem ipsam sapiente! Recusandae, minima commodi? Quos neque dicta incidunt?</p>
+       <button>share</button>
+   </div>
+     <div class="overlay"></div>
+     <div class="share">
+         <h2>share now</h2>
+         <button>social link</button>
+         <button>social link</button>
+         <button>social link</button>
+     </div>
+
+
+
+
+    <script>
+       const shareButton = document.querySelector('button');
+       const overlay = document.querySelector('.overlay');
+       const shareModal = document.querySelector('.share');
+
+
+       const title = window.document.title;
+       const url = window.document.location.href;
+
+         shareButton.addEventListener('click', () => {
+            if(navigator.share) {
+                navigator.share({
+                    title: `$(title)`,
+                    url: `$(url)`,
+                }).then(() => {
+                   console.log('thanks for sharing'); 
+                })
+                .catch(console.error);
+            }else{
+                overlay.classList.add('show-share');
+                shareModal.classList.add('show-share');
+            }
+
+         })
+         overlay.addEventListener('click', () => {
+           overlay.classList.remove('show-share');
+           shareModal.classList.remove('show-share');
+         })
+
+    </script>
+</body>
+</html>
